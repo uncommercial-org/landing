@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Uncommercial.org - Digital AID</title>
+    <meta name="description" content="Uncommercial.org platform build for volunteer developers, designers and just good people to help any non commercial organisations resolve problems connected to web.">
+    <meta name="keywords" content="uncommercial help, non commercial organisations, non profit organisations, help for non commercial for free">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="favicon.svg">
+    <link rel="mask-icon" href="favicon.svg" color="#ffffff">
+    <style>
+        /* Common */
+        html {
+            min-height: 100vh;
+            box-sizing: border-box;
+            font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji;
+            font-size: 14px;
+            line-height: 1;
+            color: #101010;
+            -webkit-text-size-adjust: none;
+            text-size-adjust: none;
+        }
+
+        *, *:before, *:after {
+            box-sizing: inherit;
+        }
+
+        .container {
+            max-width: 948px;
+            margin: 0 auto;
+            padding: 80px 15px;
+        }
+
+        .title {
+            font-size: 3.5em;
+            font-weight: 600;
+            margin: 0;
+            text-align: center;
+            line-height: 1.5;
+        }
+
+        .title strong {
+            font-weight: 800px;
+            color: #1543AF;
+        }
+
+        .description {
+            font-size: 1.2em;
+            line-height: 1.2em;
+            text-align: center;
+            width: 50%;
+            margin: 0 auto;
+        }
+
+        .intro_form {
+            width: 50%;
+            margin: 30px auto;
+        }
+
+        .intro_form input {
+            display: block;
+            margin-bottom: 1.5em;
+            width: 100%;
+            border: 1px solid #d2d8dd;
+            border-radius: .25em;
+            height: 3em;
+            padding: .375em .75em;
+            line-height: 1.5;
+            color: #495057;
+            background-color: #fff;
+            transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+        }
+
+        .intro_form input:focus {
+            box-shadow: none;
+            border-color: #1543AF;
+            color: #495057;
+            background-color: #fff;
+            outline: 0px;
+            box-shadow: 0 0 0 0.2em rgba(0,123,255,.25);
+        }
+
+        .intro_form button {
+            width: 100%;
+        }
+
+        button {
+            cursor: pointer;
+            text-align: center;
+            background: #1543AF;
+            color: #fff;
+            border: none;
+            border-radius: .25em;
+            line-height: 1;
+            text-align: center;
+            text-decoration: none;
+            text-shadow: none;
+            text-transform: none;
+            user-select: none;
+            height: 3em;
+            padding: 0 15px;
+        }
+
+        button:focus {
+            outline: 0;
+        }
+
+        button:hover {
+            background: #1543AF;
+        }
+
+        #finishContainer {
+            display: none;
+            width: 50%;
+            margin: 0 auto;
+        }
+
+        .error {
+            position: fixed;
+            max-width: 320px;
+            background: #ff9494;
+            border-radius: 4px;
+        }
+
+        .error ul {
+            padding: 0;
+        }
+
+        .error ul li {
+            padding: 0px 10px;
+            margin: 5px;
+            color: #000;
+            list-style: none;
+        }
+
+        @media (max-width: 948px) {
+            .title {
+                max-width: 100%;
+                font-size: 2.5em;
+            }
+
+            .intro_form {
+                width: 90%;
+                margin: 10px auto;
+            }
+
+            #finishContainer, .description {
+                width: 90%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="error">
+        <ul id="errorContainer"></ul>
+    </div>
+    <div class="container" id="introContainer">
+        <h1 class="title">Hi, <strong>digital volunteer!</strong></h1>
+        <p class="description">Platform build for volunteer developers, designers and just good people to help any non commercial organisations resolve problems connected to web.</p>
+        <div class="intro_form">
+            <input type="text" placeholder="Full name" id="name" />
+            <input type="email" placeholder="Email" id="email" />
+            <button id="subscribe">Notify me about beta lauch</button>
+            <!-- <div class="divider">OR</div> -->
+            <!-- <div id="startSurvey">Follow us on social networks to get news: </div> -->
+        </div>
+    </div>
+    <div class="container" id="finishContainer">
+        <h1 class="title">Thanks <strong>for following us</strong></h1>
+        <p class="description">We will notify you after official BETA launching. No ads, no additional emails. Just one short email.</p>
+    </div>
+</body>
+<script>
+    const name = document.getElementById('name');
+    const email = document.getElementById('email');
+    const introContainer = document.getElementById('introContainer');
+    const finishContainer = document.getElementById('finishContainer');
+    const errorContainer = document.getElementById('errorContainer');
+    const subscribeBtn = document.getElementById('subscribe');
+
+    const touchErrorContainer = (errorData) => {
+        // prepare error data
+        const errorString = errorData
+        .map((item) => {
+            return `<li>${item}</li>`;
+        })
+        .join('');
+
+        errorContainer.innerHTML = errorString;
+    };
+
+    subscribeBtn.addEventListener('click', (e) => {
+
+        // clear errors
+        touchErrorContainer([]);
+
+        // validate user data
+        if (name.value === "" || email.value === "") {
+            touchErrorContainer(["Please validate your form for empty fields."]);
+            return;
+        }
+
+        // block button while submit
+        subscribeBtn.disabled = true;
+
+        const xhr = new XMLHttpRequest();
+        xhr.open("POST", "https://send.pageclip.co/ELuGW6i75yTvXJuiQbhTiYy576vWm52B/beta_subscription");
+        xhr.setRequestHeader("Content-Type", "application/json");
+        xhr.setRequestHeader("X-REQMETHOD","send-v1");
+        xhr.onreadystatechange = function() {
+            if (xhr.status == 200) {
+                introContainer.style.display = 'none';
+                finishContainer.style.display = 'block';
+            } else {
+                touchErrorContainer(["We are sorry, but we can`t receive information from you. Please check entered information and try again or refer our social newtworks to contact us with this problem or follow us for future news."]);
+                subscribeBtn.disabled = false;
+            }
+        }
+        xhr.send(
+            JSON.stringify({
+                name: name.value,
+                email: email.value
+            })
+        );
+    });
+</script>
+</html>
