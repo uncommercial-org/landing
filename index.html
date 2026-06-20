@@ -1,227 +1,444 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <title>Uncommercial.org - Digital AID</title>
-    <meta name="description" content="Uncommercial.org platform build for volunteer developers, designers and just good people to help any non commercial organisations resolve problems connected to web.">
-    <meta name="keywords" content="uncommercial help, non commercial organisations, non profit organisations, help for non commercial for free">
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="favicon.svg">
-    <link rel="mask-icon" href="favicon.svg" color="#ffffff">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>uncommercial.org - a hub for digital volunteers</title>
+    <meta
+      name="description"
+      content="uncommercial.org is a hub for digital volunteers building non-commercial projects for social good - open source, ad-free, and always with care to personal data."
+    />
+    <meta
+      name="keywords"
+      content="non commercial organisations digital help, non profit organisations, help for non commercial companies for free, digital volunteering, hub for digital volunteers"
+    />
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="MyWebSite" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=Hanken+Grotesk:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
     <style>
-        /* Common */
-        html {
-            min-height: 100vh;
-            box-sizing: border-box;
-            font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji;
-            font-size: 14px;
-            line-height: 1;
-            color: #101010;
-            -webkit-text-size-adjust: none;
-            text-size-adjust: none;
-        }
+      :root {
+        --bg: #f1ece3;
+        --ink: #221f1a;
+        --muted: #6f685c;
+        --line: #ddd5c7;
+        --serif: "Newsreader", Georgia, serif;
+        --sans: "Hanken Grotesk", system-ui, sans-serif;
+      }
 
-        *, *:before, *:after {
-            box-sizing: inherit;
-        }
+      * {
+        box-sizing: border-box;
+      }
 
-        .container {
-            max-width: 948px;
-            margin: 0 auto;
-            padding: 80px 15px;
-        }
+      html {
+        -webkit-font-smoothing: antialiased;
+        text-rendering: optimizeLegibility;
+      }
 
-        .title {
-            font-size: 3.5em;
-            font-weight: 600;
-            margin: 0;
-            text-align: center;
-            line-height: 1.5;
-        }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--ink);
+        font-family: var(--sans);
+        padding: 0 24px;
+      }
 
-        .title strong {
-            font-weight: 800px;
-            color: #1543AF;
-        }
+      ::selection {
+        background: rgba(34, 31, 26, 0.12);
+      }
 
-        .description {
-            font-size: 1.2em;
-            line-height: 1.2em;
-            text-align: center;
-            width: 50%;
-            margin: 0 auto;
-        }
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+      p {
+        margin: 0;
+      }
 
-        .intro_form {
-            width: 50%;
-            margin: 30px auto;
-        }
+      .wrap {
+        max-width: 760px;
+        margin: 0 auto;
+        padding: 30px 0 80px;
+      }
 
-        .intro_form input {
-            display: block;
-            margin-bottom: 1.5em;
-            width: 100%;
-            border: 1px solid #d2d8dd;
-            border-radius: .25em;
-            height: 3em;
-            padding: .375em .75em;
-            line-height: 1.5;
-            color: #495057;
-            background-color: #fff;
-            transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
-        }
+      /* Header */
+      .site-head {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 12px;
+      }
+      .wordmark {
+        font-family: var(--serif);
+        font-size: 1.12rem;
+        font-weight: 500;
+        letter-spacing: -0.01em;
+      }
+      .wordmark span {
+        color: var(--muted);
+      }
+      .top-link {
+        font-size: 0.85rem;
+        color: var(--muted);
+        transition: color 0.15s ease;
+      }
+      .top-link:hover {
+        color: var(--ink);
+      }
 
-        .intro_form input:focus {
-            box-shadow: none;
-            border-color: #1543AF;
-            color: #495057;
-            background-color: #fff;
-            outline: 0px;
-            box-shadow: 0 0 0 0.2em rgba(0,123,255,.25);
-        }
+      /* Shared bits */
+      .eyebrow,
+      .label {
+        font-size: 0.72rem;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: var(--muted);
+        font-weight: 600;
+      }
+      section {
+        margin-top: clamp(72px, 12vw, 120px);
+      }
 
-        .intro_form button {
-            width: 100%;
-        }
+      /* Hero */
+      .hero {
+        margin-top: clamp(64px, 13vw, 128px);
+      }
+      .hero .eyebrow {
+        font-size: 0.74rem;
+      }
+      .hero h1 {
+        font-family: var(--serif);
+        font-weight: 500;
+        font-size: clamp(2.3rem, 6.4vw, 4rem);
+        line-height: 1.04;
+        letter-spacing: -0.02em;
+        margin: 22px 0 0;
+        max-width: 16ch;
+        text-wrap: balance;
+      }
+      .hero .lede {
+        margin-top: 24px;
+        max-width: 48ch;
+        font-size: clamp(1.05rem, 2.2vw, 1.22rem);
+        line-height: 1.55;
+        color: var(--muted);
+        text-wrap: pretty;
+      }
 
-        button {
-            cursor: pointer;
-            text-align: center;
-            background: #1543AF;
-            color: #fff;
-            border: none;
-            border-radius: .25em;
-            line-height: 1;
-            text-align: center;
-            text-decoration: none;
-            text-shadow: none;
-            text-transform: none;
-            user-select: none;
-            height: 3em;
-            padding: 0 15px;
-        }
+      /* What we do */
+      .label {
+        margin-bottom: 22px;
+      }
+      .statement {
+        font-family: var(--serif);
+        font-size: clamp(1.4rem, 3.2vw, 1.85rem);
+        line-height: 1.42;
+        letter-spacing: -0.01em;
+        max-width: 26ch;
+        text-wrap: pretty;
+      }
+      .body-copy {
+        margin-top: 24px;
+        max-width: 54ch;
+        font-size: 1.05rem;
+        line-height: 1.62;
+        color: var(--muted);
+        text-wrap: pretty;
+      }
 
-        button:focus {
-            outline: 0;
-        }
+      /* Projects */
+      .projects-head {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        gap: 16px;
+        margin-bottom: 22px;
+      }
+      .projects-head .label {
+        margin-bottom: 0;
+      }
+      .projects-head .count {
+        font-size: 0.78rem;
+        color: var(--muted);
+      }
+      .project-list {
+        border-bottom: 1px solid var(--line);
+      }
+      .project {
+        display: block;
+        padding: 26px 6px;
+        border-top: 1px solid var(--line);
+        color: var(--ink);
+        transition:
+          color 0.15s ease,
+          background 0.15s ease;
+      }
+      .project:hover {
+        background: rgba(34, 31, 26, 0.035);
+      }
+      .project-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        gap: 16px;
+      }
+      .project-name {
+        font-family: var(--serif);
+        font-size: clamp(1.3rem, 3.4vw, 1.7rem);
+        font-weight: 500;
+      }
+      .project-gh {
+        font-size: 0.78rem;
+        color: var(--muted);
+        white-space: nowrap;
+      }
+      .project-desc {
+        margin-top: 9px;
+        color: var(--muted);
+        font-size: 1rem;
+        line-height: 1.5;
+        max-width: 56ch;
+        text-wrap: pretty;
+      }
 
-        button:hover {
-            background: #1543AF;
-        }
+      /* Get involved */
+      .involve-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+        gap: 36px 40px;
+      }
+      .involve-grid .label {
+        margin-bottom: 0;
+      }
+      .num {
+        font-family: ui-monospace, monospace;
+        font-size: 0.78rem;
+        color: var(--muted);
+        letter-spacing: 0.05em;
+      }
+      .involve-grid h3 {
+        font-family: var(--serif);
+        font-weight: 500;
+        font-size: 1.22rem;
+        margin: 11px 0 7px;
+      }
+      .involve-grid p {
+        color: var(--muted);
+        font-size: 0.98rem;
+        line-height: 1.5;
+        text-wrap: pretty;
+      }
 
-        #finishContainer {
-            display: none;
-            width: 50%;
-            margin: 0 auto;
-        }
+      /* Contact */
+      .contact-q {
+        font-family: var(--serif);
+        font-size: clamp(1.5rem, 3.6vw, 2.1rem);
+        line-height: 1.3;
+        letter-spacing: -0.01em;
+        max-width: 22ch;
+        text-wrap: pretty;
+      }
+      .email {
+        display: inline-block;
+        margin-top: 18px;
+        font-family: var(--serif);
+        font-size: clamp(1.3rem, 3vw, 1.7rem);
+        border-bottom: 1.5px solid var(--ink);
+        padding-bottom: 2px;
+        transition: opacity 0.15s ease;
+      }
+      .email:hover {
+        opacity: 0.6;
+      }
 
-        .error {
-            position: fixed;
-            max-width: 320px;
-            background: #ff9494;
-            border-radius: 4px;
-        }
-
-        .error ul {
-            padding: 0;
-        }
-
-        .error ul li {
-            padding: 0px 10px;
-            margin: 5px;
-            color: #000;
-            list-style: none;
-        }
-
-        @media (max-width: 948px) {
-            .title {
-                max-width: 100%;
-                font-size: 2.5em;
-            }
-
-            .intro_form {
-                width: 90%;
-                margin: 10px auto;
-            }
-
-            #finishContainer, .description {
-                width: 90%;
-            }
-        }
+      /* Footer */
+      .site-foot {
+        margin-top: clamp(72px, 12vw, 110px);
+        padding-top: 26px;
+        border-top: 1px solid var(--line);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 12px;
+        font-size: 0.84rem;
+        color: var(--muted);
+      }
+      .site-foot a {
+        transition: color 0.15s ease;
+      }
+      .site-foot a:hover {
+        color: var(--ink);
+      }
     </style>
-</head>
-<body>
-    <div class="error">
-        <ul id="errorContainer"></ul>
-    </div>
-    <div class="container" id="introContainer">
-        <h1 class="title">Hi, <strong>digital volunteer!</strong></h1>
-        <p class="description">Platform build for volunteer developers, designers and just good people to help any non commercial organisations resolve problems connected to web.</p>
-        <div class="intro_form">
-            <input type="text" placeholder="Full name" id="name" />
-            <input type="email" placeholder="Email" id="email" />
-            <button id="subscribe">Notify me about beta lauch</button>
-            <!-- <div class="divider">OR</div> -->
-            <!-- <div id="startSurvey">Follow us on social networks to get news: </div> -->
+  </head>
+  <body>
+    <div class="wrap">
+      <header class="site-head">
+        <span class="wordmark">uncommercial<span>.org</span></span>
+        <a
+          class="top-link"
+          href="https://github.com/uncommercial-org"
+          target="_blank"
+          rel="noopener"
+          >GitHub&nbsp;&#8599;</a
+        >
+      </header>
+
+      <section class="hero">
+        <div class="eyebrow">
+          Non-commercial &middot; Open source &middot; Made by volunteers
         </div>
+        <h1>Small tools, made with care, given away for free.</h1>
+        <p class="lede">
+          uncommercial.org is a hub for digital volunteers building projects for
+          social good - open source, ad-free, and always with care to personal
+          data.
+        </p>
+      </section>
+
+      <section>
+        <div class="label">What we do</div>
+        <p class="statement">
+          We find small, real problems and build careful solutions for the
+          people who have them - then share everything for free.
+        </p>
+        <p class="body-copy">
+          There's no business model here. Whatever we make is free to use, free
+          to fork, and built by people who care about the cause more than the
+          click - reducing waste, sharing trustworthy information, and lending a
+          hand where it's needed.
+        </p>
+      </section>
+
+      <section>
+        <div class="projects-head">
+          <div class="label">Projects</div>
+          <div class="count">3 active</div>
+        </div>
+        <div class="project-list">
+          <a
+            class="project"
+            href="https://github.com/uncommercial-org/responsabil"
+            target="_blank"
+            rel="noopener"
+          >
+            <div class="project-top">
+              <span class="project-name">responsabil</span>
+              <span class="project-gh">GitHub&nbsp;&#8599;</span>
+            </div>
+            <p class="project-desc">
+              A news blog about security and responsibility online, written for
+              people in Moldova and Romania.
+            </p>
+          </a>
+          <a
+            class="project"
+            href="https://github.com/uncommercial-org/no-junk-mail"
+            target="_blank"
+            rel="noopener"
+          >
+            <div class="project-top">
+              <span class="project-name">no-junk-mail</span>
+              <span class="project-gh">GitHub&nbsp;&#8599;</span>
+            </div>
+            <p class="project-desc">
+              Request a &ldquo;No Junk Mail&rdquo; sticker for your mailbox.
+              Less paper waste, a calmer planet.
+            </p>
+          </a>
+          <a
+            class="project"
+            href="https://github.com/uncommercial-org/christmas-warm-hearts"
+            target="_blank"
+            rel="noopener"
+          >
+            <div class="project-top">
+              <span class="project-name">christmas-warm-hearts</span>
+              <span class="project-gh">GitHub&nbsp;&#8599;</span>
+            </div>
+            <p class="project-desc">
+              Warm Hearts (&#1047;&#1110;&#1075;&#1088;&#1110;&#1081;
+              &#1089;&#1077;&#1088;&#1094;&#1077;
+              &#1074;&#1086;&#1111;&#1085;&#1072;) - small gestures to warm the
+              hearts of soldiers over the holidays.
+            </p>
+          </a>
+        </div>
+      </section>
+
+      <section>
+        <div class="label">Get involved</div>
+        <div class="involve-grid">
+          <div>
+            <div class="num">01</div>
+            <h3>Volunteer your time</h3>
+            <p>
+              Lend a few hours to a project that matters. No long commitment
+              required.
+            </p>
+          </div>
+          <div>
+            <div class="num">02</div>
+            <h3>Contribute on GitHub</h3>
+            <p>
+              Code, design, translate, or fix a typo. Every pull request counts.
+            </p>
+          </div>
+          <div>
+            <div class="num">03</div>
+            <h3>Suggest a project</h3>
+            <p>
+              Spotted a problem worth solving? Tell us and we'll dig in
+              together.
+            </p>
+          </div>
+          <div>
+            <div class="num">04</div>
+            <h3>Ask for help</h3>
+            <p>
+              Running a cause and need digital hands? We might be able to help.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="label">Contact</div>
+        <p class="contact-q">Have an idea, a problem, or a few free hours?</p>
+        <a
+          class="email"
+          href="/cdn-cgi/l/email-protection#d7b3b2a197a2b9b4b8babab2a5b4beb6bbf9b8a5b0"
+          ><span
+            class="__cf_email__"
+            data-cfemail="92f6f7e4d2e7fcf1fdfffff7e0f1fbf3febcfde0f5"
+            >[contact&#160;us]</span
+          ></a
+        >
+      </section>
+
+      <footer class="site-foot">
+        <span>&copy; 2026 uncommercial.org &middot; Built by volunteers</span>
+        <a
+          href="https://github.com/uncommercial-org"
+          target="_blank"
+          rel="noopener"
+          >GitHub&nbsp;&#8599;</a
+        >
+      </footer>
     </div>
-    <div class="container" id="finishContainer">
-        <h1 class="title">Thanks <strong>for following us</strong></h1>
-        <p class="description">We will notify you after official BETA launching. No ads, no additional emails. Just one short email.</p>
-    </div>
-</body>
-<script>
-    const name = document.getElementById('name');
-    const email = document.getElementById('email');
-    const introContainer = document.getElementById('introContainer');
-    const finishContainer = document.getElementById('finishContainer');
-    const errorContainer = document.getElementById('errorContainer');
-    const subscribeBtn = document.getElementById('subscribe');
-
-    const touchErrorContainer = (errorData) => {
-        // prepare error data
-        const errorString = errorData
-        .map((item) => {
-            return `<li>${item}</li>`;
-        })
-        .join('');
-
-        errorContainer.innerHTML = errorString;
-    };
-
-    subscribeBtn.addEventListener('click', (e) => {
-
-        // clear errors
-        touchErrorContainer([]);
-
-        // validate user data
-        if (name.value === "" || email.value === "") {
-            touchErrorContainer(["Please validate your form for empty fields."]);
-            return;
-        }
-
-        // block button while submit
-        subscribeBtn.disabled = true;
-
-        const xhr = new XMLHttpRequest();
-        xhr.open("POST", "https://send.pageclip.co/ELuGW6i75yTvXJuiQbhTiYy576vWm52B/beta_subscription");
-        xhr.setRequestHeader("Content-Type", "application/json");
-        xhr.setRequestHeader("X-REQMETHOD","send-v1");
-        xhr.onreadystatechange = function() {
-            if (xhr.status == 200) {
-                introContainer.style.display = 'none';
-                finishContainer.style.display = 'block';
-            } else {
-                touchErrorContainer(["We are sorry, but we can`t receive information from you. Please check entered information and try again or refer our social newtworks to contact us with this problem or follow us for future news."]);
-                subscribeBtn.disabled = false;
-            }
-        }
-        xhr.send(
-            JSON.stringify({
-                name: name.value,
-                email: email.value
-            })
-        );
-    });
-</script>
+    <script
+      data-cfasync="false"
+      src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"
+    ></script>
+  </body>
 </html>
